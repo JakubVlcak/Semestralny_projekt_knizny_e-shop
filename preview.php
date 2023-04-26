@@ -12,22 +12,11 @@ include_once 'db_connection.php';
         ?>
 
         <div class="tm-main-content no-pad-b">
-
-            <section class="row tm-item-preview">
-                <div class="col-md-6 col-sm-12 mb-md-0 mb-5">
-                    <img src="img/image-05-preview.jpg" alt="Image" class="img-fluid tm-img-center-sm">
-                </div>
-                <div class="col-md-6 col-sm-12">
-                    <h2 class="tm-blue-text tm-margin-b-p">Mauris cursus turpis</h2>
-                    <p class="tm-margin-b-p">Suspendisse suscipit tortor eu nunc fermentum pellentesque. Donec vaius diam ut velit porttitor accumsan. Cras ac porttitor urna, in vehicula diam. Ut ultricies leo dapibus, facilisis justo vel, dignissim tortor.</p>
-                    <p class="tm-margin-b-p">Ut iaculis vel libero a auctor. Integer arcu orci, vaius id velit sed, lacinia venenatis felis. Integer in facilisis tortor. Vivamus facilisis mattis finibus. Vestibulum in aliquam nisl. Nunc pretium elementum posuere.</p>
-                    <p class="tm-margin-b-p">Nunc vulputate placerat pulvinar. Integer ornare, enim et vestibulum mattis, dolor lacus congue sapien, eget tempor sapien est ut mauris.</p>
-                    <p class="tm-blue-text tm-margin-b-s">Categories: <a href="#" class="tm-blue-text">New Story</a>, <a href="#" class="tm-blue-text">Epic</a>, <a href="#" class="tm-blue-text">Popular</a></p>
-                    <p class="tm-blue-text tm-margin-b-s">Views: 10,890</p>
-                    <p class="tm-blue-text tm-margin-b">Rating: <img src="img/star.png" alt="Star image"> <img src="img/star.png" alt="Star image"> <img src="img/star.png" alt="Star image"> <img src="img/star.png" alt="Star image"></p>
-                    <a href="#" class="tm-btn tm-btn-gray tm-margin-r-20 tm-margin-b-s">Preview</a><a href="#" class="tm-btn tm-btn-blue">Download</a>
-                </div>
-            </section>
+            <?php 
+            include_once 'functions/functions.php';
+            $item = preview($conn);
+            get_preview($item,$conn);
+            ?>
 
             <div class="tm-gallery no-pad-b">
                 <div class="row">
