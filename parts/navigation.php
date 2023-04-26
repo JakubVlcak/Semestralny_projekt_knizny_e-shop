@@ -10,9 +10,9 @@
             <ul class="nav nav-fill tm-main-nav-ul">
                 <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="catalogs.php">Catalogs</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Awards</a></li>
-                <li class="nav-item"><a class="nav-link" href="team.php">Our Team</a></li>
-                <li class="nav-item"><a class="nav-link" href="contact.php">Contact Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="log_in.php">Log In</a></li>
+                <li class="nav-item"><a class="nav-link" href="sign_in.php">Sign In</a></li>
+                <li class="nav-item"><a class="nav-link" href="cart.php">Shopping Cart</a></li>
             </ul>
         </div>
     </nav>
