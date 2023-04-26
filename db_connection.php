@@ -9,7 +9,8 @@ $database = getenv("DB_NAME");
 //$conn = mysqli_connect($host, $username, $password, $database);
 $conn = mysqli_connect($host, $username, $password, $database);
 
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
+try {
+  $conn = new PDO("mysql:host=$host; dbname=$database", $username, $password);
+} catch (PDOException $exception) {
+  echo "Connection to sql failed: " . $exception->getMessage();
 }
