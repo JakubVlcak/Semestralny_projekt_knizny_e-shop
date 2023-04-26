@@ -1,6 +1,7 @@
 <?php
 include_once 'parts/html_header.php';
-
+include_once 'environmental_variables.php';
+include_once 'db_connection.php';
 ?>
 
 <body>
