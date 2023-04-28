@@ -44,10 +44,9 @@ include_once 'functions/functions.php';
         ?>
     </div>
 
-    <!-- load JS files -->
-    <script src="js/jquery-1.11.3.min.js"></script> <!-- jQuery (https://jquery.com/download/) -->
-    <script src="js/popper.min.js"></script> <!-- Popper (https://popper.js.org/) -->
-    <script src="js/bootstrap.min.js"></script> <!-- Bootstrap (https://getbootstrap.com/) -->
+    <?php
+    include_once 'parts/scripts.php';
+    ?>
     <script>
         $(document).ready(function() {
 
@@ -58,8 +57,5 @@ include_once 'functions/functions.php';
     </script>
 
 </body>
-<?php
-include_once 'db_connection_close.php'
-?>
 
 </html>
