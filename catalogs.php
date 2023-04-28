@@ -8,7 +8,11 @@ include_once 'parts/html_header.php';
         include_once 'parts/navigation.php';
         ?>
     </div>
+
     <?php
-    include_once 'parts/footer.php';
+    include_once 'parts/scripts.php';
     ?>
 </body>
+<?php
+include_once 'parts/footer.php';
+?>
