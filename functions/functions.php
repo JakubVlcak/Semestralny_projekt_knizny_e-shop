@@ -2,8 +2,9 @@
 function preview($conn)
 {
     $item_id = $_GET['id'];
-    $result = $conn->query("SELECT * FROM books WHERE idbooks = '{$item_id}'");
-    $item = $result->fetch();
+    $stmt = $conn->prepare("SELECT * FROM books WHERE idbooks = ?");
+    $stmt->execute([$item_id]);
+    $item = $stmt->fetch();
     return $item;
 }
 
@@ -22,6 +23,7 @@ function get_preview($item, $conn)
     echo '</div>';
     echo '</section>';
 }
+
 
 function get_books($conn)
 {
