@@ -12,7 +12,7 @@
                 <li class="nav-item"><a class="nav-link" href="catalogs.php">Catalogs</a></li>
                 <li class="nav-item"><a class="nav-link" href="log_in.php">Log In</a></li>
                 <li class="nav-item"><a class="nav-link" href="sign_in.php">Sign In</a></li>
-                <li class="nav-item"><a class="nav-link" href="cart.php">Shopping Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="cart.php">Shopping Cart &#128722</a></li>
             </ul>
         </div>
     </nav>
