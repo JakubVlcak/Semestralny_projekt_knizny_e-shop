@@ -10,12 +10,27 @@ if (!empty($result)) {
         $_SESSION["authenticated"] = 1;
         $_SESSION["iduser"]=$result["idusers"];
         $_SESSION["name"]=$result["name"];
-        $message = "You have been authenticated";
         if ($result["isadmin"]) {
             $_SESSION["isadmin"] = 1;
         } else {
             $_SESSION["isadmin"] = 0;
         }
+        $stmt = $conn->prepare("SELECT * FROM cart WHERE users_idusers = ?");
+        $stmt->execute([$result["idusers"]]);
+        if(empty($stmt->fetch())){
+            $stmt2 = $conn->prepare("INSERT INTO `cart` (`users_idusers`) VALUES (?)");
+            $stmt2->execute([$result["idusers"]]);
+            $stmt3 = $conn->prepare("SELECT * FROM cart WHERE users_idusers = ?");
+            $stmt3->execute([$result["idusers"]]);
+            $result2=$stmt3->fetch();
+            $cart=$result2["idcart"];
+        }
+        else{
+            $result3=$stmt->fetch();
+            $cart=$result3["idcart"];
+        }
+        $_SESSION["idcart"] = $cart;
+        $message = "You have been authenticated";
     } else {
         $_SESSION["authenticated"] = 0;
         $message = "Password is not correct";
