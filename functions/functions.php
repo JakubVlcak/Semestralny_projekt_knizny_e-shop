@@ -29,13 +29,14 @@ function get_books($conn)
 {
     $stmt = $conn->query("SELECT * FROM books");
     while ($row = $stmt->fetch()) {
-        echo '<figure class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">';
+        echo '<figure class="text-center col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">';
         echo '<a href="preview.php?id=' . $row['idbooks'] . '">';
         echo '<div class="tm-gallery-item-overlay">';
         echo '<img src="' . $row["urlimage"] . '" alt="Image" class="img-fluid tm-img-center">';
         echo '</div>';
-        echo '<p class="tm-figcaption">' . $row["title"] . ' ' . $row["price"] . '€</p>';
+        echo '<span class="tm-figcaption">' . $row["title"] . ' ' . $row["price"] . '€ </span>';
         echo '</a>';
+        echo '<button onclick="addToCart('. $row['idbooks'] .')">&#128722</button>';
         echo '</figure>';
     }
 }
