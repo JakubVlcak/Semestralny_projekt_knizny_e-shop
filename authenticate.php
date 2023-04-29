@@ -1,13 +1,15 @@
 <?php
+include_once 'parts/html_header.php';
 include_once 'environmental_variables.php';
 include_once 'db_connection.php';
-session_start();
 $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 $stmt->execute([$_POST['email']]);
 $result = $stmt->fetch();
 if (!empty($result)) {
-    if (hash("sha256",$_POST["password"]) == $result["password"]) {
+    if (hash("sha256", $_POST["password"]) == $result["password"]) {
         $_SESSION["authenticated"] = 1;
+        $_SESSION["iduser"]=$result["idusers"];
+        $_SESSION["name"]=$result["name"];
         $message = "You have been authenticated";
         if ($result["isadmin"]) {
             $_SESSION["isadmin"] = 1;
@@ -21,7 +23,6 @@ if (!empty($result)) {
 } else {
     $message = "Email address doesn't exist";
 }
-include_once 'parts/html_header.php';
 ?>
 
 <body>
