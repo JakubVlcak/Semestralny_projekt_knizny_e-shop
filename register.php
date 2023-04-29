@@ -1,8 +1,6 @@
 <?php
-
 include_once 'environmental_variables.php';
 include_once 'db_connection.php';
-session_start();
 $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 $stmt->execute([$_POST['email']]);
 $result = $stmt->fetch();
@@ -12,6 +10,13 @@ if (empty($result)) {
     $email = $_POST['email'];
     $stmt = $conn->prepare("INSERT INTO `users`(`email`, `name`, `password`, `isadmin`) VALUES (?,?,?,?)");
     $stmt->execute([$email,$name,$pass,0]);
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    $stmt->execute([$_POST['email']]);
+    $result = $stmt->fetch();
+    $_SESSION["authenticated"] = 1;
+    $_SESSION["iduser"]=$result["iduser"];
+    $_SESSION["name"]=$name;
+    $_SESSION["isadmin"] = 0;
     $item = $stmt->fetch();
     $message = "Succesfuly registered";
 }
