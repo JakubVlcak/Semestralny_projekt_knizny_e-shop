@@ -36,7 +36,7 @@ function get_books($conn)
         echo '</div>';
         echo '<span class="tm-figcaption">' . $row["title"] . ' ' . $row["price"] . '€ </span>';
         echo '</a>';
-        echo '<button onclick="addToCart('. $row['idbooks'] .')">&#128722</button>';
+        echo '<button onclick="addToCart('. $row['idbooks'] .','. $_SESSION['idcart'] .')">&#128722</button>';
         echo '</figure>';
     }
 }
