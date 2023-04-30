@@ -17,7 +17,8 @@ if (!empty($result)) {
         }
         $stmt = $conn->prepare("SELECT * FROM cart WHERE users_idusers = ?");
         $stmt->execute([$result["idusers"]]);
-        if(empty($stmt->fetch())){
+        $result_cart=$stmt->fetch();
+        if(empty($result_cart)){
             $stmt2 = $conn->prepare("INSERT INTO `cart` (`users_idusers`) VALUES (?)");
             $stmt2->execute([$result["idusers"]]);
             $stmt3 = $conn->prepare("SELECT * FROM cart WHERE users_idusers = ?");
@@ -26,8 +27,7 @@ if (!empty($result)) {
             $cart=$result2["idcart"];
         }
         else{
-            $result3=$stmt->fetch();
-            $cart=$result3["idcart"];
+            $cart=$result_cart["idcart"];
         }
         $_SESSION["idcart"] = $cart;
         $message = "You have been authenticated";
