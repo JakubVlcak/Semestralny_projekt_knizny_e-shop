@@ -1,5 +1,6 @@
-function addToCart(id){
-    data = {"id":id};
+function addToCart(id,idcart){
+    data = {"id":id,
+        "idcart": idcart};
     fetch('add_to_cart.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
