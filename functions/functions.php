@@ -36,7 +36,29 @@ function get_books($conn)
         echo '</div>';
         echo '<span class="tm-figcaption">' . $row["title"] . ' ' . $row["price"] . '€ </span>';
         echo '</a>';
-        echo '<button onclick="addToCart('. $row['idbooks'] .','. $_SESSION['idcart'] .')">&#128722</button>';
+        echo '<button onclick="addToCart(' . $row['idbooks'] . ',' . $_SESSION['idcart'] . ')">&#128722</button>';
         echo '</figure>';
     }
+}
+function show_cart($conn)
+{
+    $stmt = get_books_from_cart($conn);
+    while ($row = $stmt->fetch()) {
+        echo '<tr>';
+        echo '<td>' . $row["books_idbooks"] . '</td>';
+        echo '<th scope="row">' . $row["title"] . '</th>';
+        echo '<td>' . $row["count(books_has_cart.books_idbooks)"] . '</td>';
+        echo '<td>' . $row["price"] . '</td>';
+        echo '<td>' . $row["total"] . '</td>';
+        echo  '</tr>';
+    }
+}
+function get_books_from_cart($conn)
+{
+    $stmt = $conn->prepare("SELECT count(books_has_cart.books_idbooks),books.price,books.title,books_has_cart.books_idbooks,(books.price*count(books_has_cart.books_idbooks)) as total from books_has_cart inner join books on books.idbooks = books_has_cart.books_idbooks
+    inner join cart on cart.idcart = books_has_cart.cart_idcart
+    where cart.users_idusers = ?
+    group by books_has_cart.books_idbooks");
+    $stmt->execute([$_SESSION['iduser']]);
+    return $stmt;
 }
