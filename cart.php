@@ -1,5 +1,8 @@
 <?php
 include_once 'parts/html_header.php';
+include_once 'functions/functions.php';
+include_once 'environmental_variables.php';
+include_once 'db_connection.php';
 ?>
 
 <body>
@@ -7,6 +10,22 @@ include_once 'parts/html_header.php';
         <?php
         include_once 'parts/navigation.php';
         ?>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th  scope="col ">id</th>
+                    <th scope="col">title</th>
+                    <th scope="col">count</th>
+                    <th scope="col">price</th>
+                    <th scope="col"> total </th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                show_cart($conn);
+                ?>
+            </tbody>
+        </table>
     </div>
 
     <?php
