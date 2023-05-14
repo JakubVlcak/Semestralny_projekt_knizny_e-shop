@@ -47,9 +47,9 @@ function show_cart($conn)
         echo '<tr>';
         echo '<td>' . $row["books_idbooks"] . '</td>';
         echo '<th scope="row">' . $row["title"] . '</th>';
-        echo '<td>' . $row["count(books_has_cart.books_idbooks)"] . '</td>';
+        echo '<td>  <button onclick="plusToCart(' . $row["books_idbooks"] .',' . $_SESSION['idcart'] . ')"><i class="fa-solid fa-plus"></i></button> ' . $row["count(books_has_cart.books_idbooks)"] . ' <button onclick="minusFromCart(' . $row["books_idbooks"] . ',' . $_SESSION['idcart'] . ')"><i class="fa-solid fa-minus"></i></button></td>';
         echo '<td>' . $row["price"] . '</td>';
-        echo '<td>' . $row["total"] . '</td>';
+        echo '<td>' . $row["total"] . ' <button onclick="deleteFromCart(' . $row["books_idbooks"] . ',' . $_SESSION['idcart'] .')"><i class="fa-solid fa-xmark"></i></button></td>';
         echo  '</tr>';
     }
 }
