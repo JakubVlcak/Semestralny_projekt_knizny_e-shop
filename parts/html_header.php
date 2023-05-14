@@ -1,8 +1,11 @@
 <?php
 if(!isset($_SESSION)){
     session_start();
+    
 }
 ?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -24,7 +27,8 @@ http://www.tooplate.com/view/2092-shelf
     <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font Awesome -->
     <link rel="stylesheet" href="css/bootstrap.min.css"> <!-- Bootstrap style -->
     <link rel="stylesheet" href="css/tooplate-style.css"> <!-- Templatemo style -->
-
+    <script src="https://kit.fontawesome.com/b8df1d95a6.js" crossorigin="anonymous"></script>
+    <script src="js/cart.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
