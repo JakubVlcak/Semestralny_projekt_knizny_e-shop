@@ -2,12 +2,10 @@
 include_once 'parts/html_header.php';
 include_once 'environmental_variables.php';
 include_once 'db_connection.php';
+include_once 'parts/session.php';
 if(isset($_SESSION["authenticated"])){
     if($_SESSION["authenticated"]==1){
-        $_SESSION["authenticated"] = 0;
-        $_SESSION["iduser"]=0;
-        $_SESSION["name"]="";
-        $_SESSION["isadmin"]=0;
+        session_unset();
         $message = "You have been logged out";
     }
     else{

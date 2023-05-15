@@ -27,7 +27,15 @@ function get_preview($item, $conn)
 
 function get_books($conn)
 {
-    $stmt = $conn->query("SELECT * FROM books");
+    $per_page_record = 8;
+    if (isset($_GET["page"])) {
+        $page  = $_GET["page"];
+    } else {
+        $page = 1;
+    }
+
+    $start_from = ($page - 1) * $per_page_record;
+    $stmt = $conn->query("SELECT * FROM books LIMIT $start_from, $per_page_record");
     while ($row = $stmt->fetch()) {
         echo '<figure class="text-center col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">';
         echo '<a href="preview.php?id=' . $row['idbooks'] . '">';
@@ -38,7 +46,46 @@ function get_books($conn)
         echo '</a>';
         echo '<button onclick="addToCart(' . $row['idbooks'] . ',' . $_SESSION['idcart'] . ')">&#128722</button>';
         echo '</figure>';
+    }          
+                    
+    echo '<nav class="tm-gallery-nav">';
+    echo '<ul class="nav justify-content-center">';
+
+    $stmt = $conn->query("SELECT COUNT(*) FROM books");
+    $stmt->execute();
+    $row = $stmt->fetch();
+    $total_records = $row[0];
+
+    echo "</br>";
+    // Number of pages required.   
+    $total_pages = ceil($total_records / $per_page_record);
+    $pagLink = "";
+
+    if ($page > 2) {
+        echo '<li class="nav-item"><a class="nav-link" href="index.php?page="' . ($page - 1) . '">  Prev </a>';
     }
+    elseif($page == 2){
+        echo '<li class="nav-item"><a class="nav-link" href="index.php"> Prev </a>';
+    }
+
+    for ($i = 1; $i <= $total_pages; $i++) {
+        if ($i == $page) {
+            $pagLink .= '<li class="nav-item"><a class="nav-link" "active" href="index.php?page='
+                . $i . '">' . $i . ' </a>';
+        } else {
+            $pagLink .= '<li class="nav-item"><a class="nav-link" href="index.php?page=' . $i . '">   
+                                                ' . $i . ' </a>';
+        }
+    };
+    echo $pagLink;
+
+    if ($page < $total_pages) {
+        echo ' <li class="nav-item"><a class="nav-link" href="index.php?page=' . ($page + 1) . '">  Next </a>';
+    }
+
+
+    echo '</ul>';
+    echo '</nav>';
 }
 function show_cart($conn)
 {
@@ -47,9 +94,9 @@ function show_cart($conn)
         echo '<tr>';
         echo '<td>' . $row["books_idbooks"] . '</td>';
         echo '<th scope="row">' . $row["title"] . '</th>';
-        echo '<td>  <button onclick="plusToCart(' . $row["books_idbooks"] .',' . $_SESSION['idcart'] . ')"><i class="fa-solid fa-plus"></i></button> ' . $row["count(books_has_cart.books_idbooks)"] . ' <button onclick="minusFromCart(' . $row["books_idbooks"] . ',' . $_SESSION['idcart'] . ')"><i class="fa-solid fa-minus"></i></button></td>';
-        echo '<td>' . $row["price"] . '</td>';
-        echo '<td>' . $row["total"] . ' <button onclick="deleteFromCart(' . $row["books_idbooks"] . ',' . $_SESSION['idcart'] .')"><i class="fa-solid fa-xmark"></i></button></td>';
+        echo '<td>  <button onclick="plusToCart(' . $row["books_idbooks"] . ',' . $_SESSION['idcart'] . ')"><i class="fa-solid fa-plus"></i></button> ' . $row["count(books_has_cart.books_idbooks)"] . ' <button onclick="minusFromCart(' . $row["books_idbooks"] . ',' . $_SESSION['idcart'] . ')"><i class="fa-solid fa-minus"></i></button></td>';
+        echo '<td>' . $row["price"] . ' € </td>';
+        echo '<td>' . $row["total"] . ' € <button onclick="deleteFromCart(' . $row["books_idbooks"] . ',' . $_SESSION['idcart'] . ')"><i class="fa-solid fa-xmark"></i></button></td>';
         echo  '</tr>';
     }
 }

@@ -1,7 +1,8 @@
 <?php
-include_once 'parts/html_header.php';
 include_once 'environmental_variables.php';
 include_once 'db_connection.php';
+include_once 'parts/session.php';
+include_once 'parts/html_header.php';
 $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
 $stmt->execute([$_POST['email']]);
 $result = $stmt->fetch();

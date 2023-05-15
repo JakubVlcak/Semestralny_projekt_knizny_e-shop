@@ -1,7 +1,8 @@
 <?php
-include_once 'parts/html_header.php';
 include_once 'environmental_variables.php';
 include_once 'db_connection.php';
+include_once 'parts/session.php';
+include_once 'parts/html_header.php';
 include_once 'functions/functions.php';
 ?>
 
@@ -28,15 +29,6 @@ include_once 'functions/functions.php';
                         ?>
                     </div>
                 </div>
-
-                <nav class="tm-gallery-nav">
-                    <ul class="nav justify-content-center">
-                        <li class="nav-item"><a class="nav-link active" href="#">1</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">2</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">3</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">4</a></li>
-                    </ul>
-                </nav>
             </section>
         </div>
         <?php
