@@ -1,4 +1,7 @@
 <?php
+include_once 'environmental_variables.php';
+include_once 'db_connection.php';
+include_once 'parts/session.php';
 include_once 'parts/html_header.php';
 ?>
 
@@ -17,6 +20,8 @@ include_once 'parts/html_header.php';
         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="">
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+        <input type="hidden" name="iduser" id="iduser" value="<?php echo $_SESSION["iduser"]; ?>">
+        <input type="hidden" name="idcart" id="idcart" value="<?php echo $_SESSION["idcart"]; ?>">
         <div class="checkbox mb-3">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
