@@ -22,13 +22,11 @@ include_once 'functions/functions.php';
 
                 <p>Shelf HTML template is provided by Tooplate. Please tell your friends about it. Thank you. Images are from Unsplash website. In tincidunt metus sed justo tincidunt sollicitudin. Curabitur magna tellus, condimentum vitae consectetur id, elementum sit amet erat.</p>
 
-                <div class="tm-gallery">
-                    <div class="row">
-                        <?php
-                        get_books($conn);
-                        ?>
-                    </div>
-                </div>
+
+                <?php
+                get_books($conn);
+                ?>
+
             </section>
         </div>
         <?php

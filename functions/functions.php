@@ -19,7 +19,7 @@ function get_preview($item, $conn)
     echo '<h2 class="tm-blue-text tm-margin-b-p">' . $item["title"] . '</h2>';
     echo '<p class="tm-margin-b-p">' . $item["description"] . '</p>';
     echo '<p class="tm-blue-text tm-margin-b">Price: ' . $item["price"] . ' €</p>';
-    echo '<a href="#" class="tm-btn tm-btn-blue">Add to cart</a>';
+    echo '<button onclick="addToCart(' . $item['idbooks'] . ',' . $_SESSION['idcart'] . ')" class="tm-btn tm-btn-blue">Add to cart</button>';
     echo '</div>';
     echo '</section>';
 }
@@ -36,6 +36,8 @@ function get_books($conn)
 
     $start_from = ($page - 1) * $per_page_record;
     $stmt = $conn->query("SELECT * FROM books LIMIT $start_from, $per_page_record");
+    echo '<div class="tm-gallery">';
+    echo '<div class="row">';
     while ($row = $stmt->fetch()) {
         echo '<figure class="text-center col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">';
         echo '<a href="preview.php?id=' . $row['idbooks'] . '">';
@@ -47,7 +49,8 @@ function get_books($conn)
         echo '<button onclick="addToCart(' . $row['idbooks'] . ',' . $_SESSION['idcart'] . ')">&#128722</button>';
         echo '</figure>';
     }          
-                    
+    echo '</div>';
+    echo '</div>';
     echo '<nav class="tm-gallery-nav">';
     echo '<ul class="nav justify-content-center">';
 
@@ -56,7 +59,7 @@ function get_books($conn)
     $row = $stmt->fetch();
     $total_records = $row[0];
 
-    echo "</br>";
+    
     // Number of pages required.   
     $total_pages = ceil($total_records / $per_page_record);
     $pagLink = "";
@@ -107,5 +110,35 @@ function get_books_from_cart($conn)
     where cart.users_idusers = ?
     group by books_has_cart.books_idbooks");
     $stmt->execute([$_SESSION['iduser']]);
+    return $stmt;
+}
+
+function get_random_books($conn)
+{
+    echo'<div class="tm-gallery no-pad-b">';
+    echo' <div class="row">';
+    $stmt = random_books($conn);
+    while ($row = $stmt->fetch()) {
+    
+                    
+    echo'<figure class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item mb-5">';
+                        echo'<a href="preview.php?id=' . $row['idbooks'] . '">';
+                            echo'<div class="tm-gallery-item-overlay">';
+                                echo'<img src="' . $row["urlimage"] . '" alt="Image" class="img-fluid tm-img-center">';
+                            echo'</div>';
+                            echo' <span class="text-nowrap tm-figcaption no-pad-b">' . $row["title"] . ' ' . $row["price"] . '€ </span>';
+                        echo'</a>';
+                        echo '<button onclick="addToCart(' . $row['idbooks'] . ',' . $_SESSION['idcart'] . ')">&#128722</button>';
+                    echo'</figure>';
+              
+    }
+    echo'</div>';
+    echo'</div>';
+}
+
+function random_books($conn)
+{
+    $stmt = $conn->prepare("SELECT * FROM books ORDER BY RAND() LIMIT 4");
+    $stmt->execute();
     return $stmt;
 }

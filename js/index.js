@@ -8,4 +8,5 @@ function addToCart(id, idcart) {
         .then(data => console.log(data))
         .catch(error => console.log(error));
     console.log(JSON.stringify(data));
+    location.reload();
 }
